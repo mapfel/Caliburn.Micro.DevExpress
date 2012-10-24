@@ -10,7 +10,7 @@
     <projectUrl>http://calmicrodevexpress.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial version.</releaseNotes>
+    <releaseNotes>Improved GetNamedElements to support LayoutControl.GroupBox as a container.</releaseNotes>
     <copyright>Copyright 2012 by $author$</copyright>
     <tags>Caliburn.Micro DevExpress WPF</tags>
     <dependencies>
