@@ -6,12 +6,15 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
   <Grid>
-    <dxlc:LayoutControl >
+    <dxlc:LayoutControl>
       <dxlc:LayoutGroup Orientation="Vertical">
         <Button Content="Something" Name="Something" />
         <dxlc:LayoutItem Label="Text" Name="layoutItem1">
-          <TextBox Name="Text" />
+          <!--<TextBox Name="Text" />-->
         </dxlc:LayoutItem>
+        <dxlc:GroupBox Header="header">
+          <TextBox Name="Text" />
+        </dxlc:GroupBox>
       </dxlc:LayoutGroup>
     </dxlc:LayoutControl>
   </Grid>

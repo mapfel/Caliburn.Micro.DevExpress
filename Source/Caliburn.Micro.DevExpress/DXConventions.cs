@@ -10,6 +10,7 @@ using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.LayoutControl;
 using DevExpress.Xpf.PivotGrid;
+using DXGroupBox = DevExpress.Xpf.LayoutControl.GroupBox;
 using LayoutGroup = DevExpress.Xpf.Docking.LayoutGroup;
 
 namespace Caliburn.Micro.DevExpress
@@ -21,7 +22,7 @@ namespace Caliburn.Micro.DevExpress
 
     /// <summary>
     /// Installs conventions for DevExpress controls.
-    /// This is neccessary to use Caliburn Micro with DevExpress controls.
+    /// This is necessary to use Caliburn Micro with DevExpress controls.
     /// </summary>
     public static void Install()
     {
@@ -43,10 +44,13 @@ namespace Caliburn.Micro.DevExpress
 
       //Grid
       ConventionManager.AddElementConvention<DataControlBase>(DataControlBase.ItemsSourceProperty, "DataContext", "Loaded");
+
       //PivotGrid
       ConventionManager.AddElementConvention<PivotGridControl>(PivotGridControl.DataSourceProperty, "DataContext", "Loaded");
+
       //LayoutControl
       ConventionManager.AddElementConvention<DataLayoutControl>(DataLayoutControl.CurrentItemProperty, "DataContext", "Loaded");
+
       //Editors
       ConventionManager.AddElementConvention<LookUpEditBase>(LookUpEditBase.ItemsSourceProperty, "SelectedItem", "SelectedIndexChanged")
         .ApplyBinding = (viewModelType, path, property, element, convention) =>
@@ -57,6 +61,7 @@ namespace Caliburn.Micro.DevExpress
           ConventionManager.ConfigureSelectedItem(element, LookUpEditBase.SelectedItemProperty, viewModelType, path);
           return true;
         };
+
       //Docking
       ConventionManager.AddElementConvention<DocumentGroup>(DocumentGroup.ItemsSourceProperty, "ItemsSource", "SelectedItemChanged")
     .ApplyBinding = (viewModelType, path, property, element, convention) =>
@@ -178,6 +183,7 @@ namespace Caliburn.Micro.DevExpress
             if (currentLayoutElement != null && !string.IsNullOrEmpty(currentLayoutElement.Name))
             {
               descendants.Add(currentLayoutElement);
+
               //Setting FrameworkElement.Name to BaseLayoutItem.Name so later Caliburn can reference the name and so no need to replace ViewModelBinder.BindProperties
               currentElement.Name = currentLayoutElement.Name;
             }
@@ -195,7 +201,7 @@ namespace Caliburn.Micro.DevExpress
           }
 
 #if NET
-          var childCount = (current is UIElement || current is UIElement3D || current is ContainerVisual ? VisualTreeHelper.GetChildrenCount(current) : 0);
+                var childCount = (current is UIElement || current is UIElement3D || current is ContainerVisual ? VisualTreeHelper.GetChildrenCount(current) : 0);
 #else
           var childCount = VisualTreeHelper.GetChildrenCount(current);
 #endif
@@ -240,42 +246,36 @@ namespace Caliburn.Micro.DevExpress
 
               else
               {
-                var dockLayoutManager = current as DockLayoutManager;
-                if (dockLayoutManager != null && dockLayoutManager.LayoutRoot != null)
-                {
-                  queue.Enqueue(dockLayoutManager.LayoutRoot);
-                }
-                else
-                {
-                  var layoutGroup = current as LayoutGroup;
-                  if (layoutGroup != null && layoutGroup.Items != null)
-                  {
-                    layoutGroup.Items.OfType<DependencyObject>()
-                    .Apply(queue.Enqueue);
-                  }
-                  else
-                  {
-                    var layoutPanel = current as LayoutPanel;
-                    if (layoutPanel != null && layoutPanel.Control != null)
+                TypeSwitch.Do(current,
+                    TypeSwitch.Case<DockLayoutManager>(x =>
                     {
-                      queue.Enqueue(layoutPanel.Control);
-                    }
-                    else
+                      if (x.LayoutRoot != null) queue.Enqueue(x.LayoutRoot);
+                    }),
+                    TypeSwitch.Case<LayoutGroup>(x =>
                     {
-                      var layoutItem = current as LayoutItem;
-                      if (layoutItem != null && layoutItem.Content != null)
-                      {
-                        queue.Enqueue(layoutItem.Content);
-                      }
-                      else
-                      {
-                        var gridControl = current as GridControl;
-                        if (gridControl != null && gridControl.View != null && !string.IsNullOrWhiteSpace(gridControl.View.Name))
-                          queue.Enqueue(gridControl.View);
-                      }
-                    }
-                  }
-                }
+                      if (x.Items != null) x.Items.OfType<DependencyObject>().Apply(queue.Enqueue);
+                    }),
+                    TypeSwitch.Case<LayoutPanel>(x =>
+                    {
+                      if (x.Control != null) queue.Enqueue(x.Control);
+                    }),
+                    TypeSwitch.Case<LayoutItem>(x =>
+                    {
+                      if (x.Content != null) queue.Enqueue(x.Content);
+                    }),
+                    TypeSwitch.Case<GridControl>(x =>
+                    {
+                      if (x.View != null && !string.IsNullOrWhiteSpace(x.View.Name)) queue.Enqueue(x.View);
+                    }),
+                    TypeSwitch.Case<DXGroupBox>(x =>
+                    {
+                      var groupContent = x.Content as DependencyObject;
+                      if (groupContent != null) queue.Enqueue(groupContent);
+                    }),
+                    TypeSwitch.Default(() =>
+                    {
+                      Log.Info("DX Convention missing for {0}.", current.GetType().Name);
+                    }));
               }
 
               #endregion DevExpress specific
