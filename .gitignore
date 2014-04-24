@@ -2,3 +2,4 @@ output
 *.suo
 bin
 obj
+*.bak

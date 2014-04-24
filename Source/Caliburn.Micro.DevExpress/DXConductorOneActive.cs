@@ -7,7 +7,7 @@ namespace Caliburn.Micro.DevExpress
   /// and CloseAction to provide a way to close document panels.
   /// </summary>
   /// <typeparam name="T">Conducted type</typeparam>
-  public class DevExpressConductorOneActive<T> : Conductor<T>.Collection.OneActive
+  public class DevExpressConductorOneActive<T> : Conductor<T>.Collection.OneActive where T : class
   {
     public DevExpressConductorOneActive()
       : base()
