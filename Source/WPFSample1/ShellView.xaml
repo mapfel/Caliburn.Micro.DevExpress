@@ -117,7 +117,7 @@
     <dxd:DockLayoutManager >
       <dxd:LayoutGroup>
         <dxd:LayoutGroup Orientation="Vertical"  ItemWidth="3*">
-          <dxd:DocumentGroup ItemHeight="3*" Name="Items">
+          <dxd:DocumentGroup ItemHeight="4.11*" Name="Items">
             <dxd:DocumentGroup.ItemStyle>
               <Style TargetType="dxd:DocumentPanel">
                 <Setter Property="CloseCommand" Value="{Binding CloseCommand}" />
@@ -127,7 +127,7 @@
               <TextBox BorderThickness="0" />
             </dxd:DocumentPanel>-->
           </dxd:DocumentGroup>
-          <dxd:LayoutPanel Caption="DetailView" ItemHeight="2*">
+          <dxd:LayoutPanel Caption="DetailView" ItemHeight="0.89*">
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

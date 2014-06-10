@@ -7,15 +7,21 @@
   using System.ComponentModel.Composition.Primitives;
   using System.Linq;
   using Caliburn.Micro;
+  using System.Windows;
 
-  public class AppBootstrapper : Bootstrapper<IShell>
+  public class AppBootstrapper : BootstrapperBase, IDisposable
   {
     private CompositionContainer container;
 
     static AppBootstrapper()
     {
-      //LogManager.GetLog = type => new ConsoleLogger(type);
       Caliburn.Micro.DevExpress.DXConventions.Install();
+    }
+
+    public AppBootstrapper()
+      : base()
+    {
+      Initialize();
     }
 
     /// <summary>
@@ -44,7 +50,7 @@
       string contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
       var exports = container.GetExportedValues<object>(contract);
 
-      if (exports.Count() > 0)
+      if (exports.Any())
         return exports.First();
 
       throw new Exception(string.Format("Could not locate any instances of contract {0}.", contract));
@@ -58,6 +64,20 @@
     protected override void BuildUp(object instance)
     {
       container.SatisfyImportsOnce(instance);
+    }
+
+    protected override void OnStartup(object sender, StartupEventArgs e)
+    {
+      DisplayRootViewFor<IShell>();
+    }
+
+    public void Dispose()
+    {
+      if (container != null)
+      {
+        container.Dispose();
+        container = null;
+      }
     }
   }
 }

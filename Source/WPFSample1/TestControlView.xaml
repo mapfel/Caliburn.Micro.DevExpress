@@ -1,20 +1,40 @@
-﻿<UserControl xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  x:Class="WPFSample1.TestControlView"
+﻿<UserControl xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:Model="clr-namespace:WPFSample1.Model"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             x:Class="WPFSample1.TestControlView"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+             d:DesignHeight="300" d:DesignWidth="300">
+  <UserControl.Resources>
+    <dx:IEnumerableDataSource x:Key="IEnumerableDataSource">
+      <dx:DesignDataManager.DesignData>
+        <dx:DesignDataSettings DataObjectType="{x:Type Model:Product}" RowCount="5"/>
+      </dx:DesignDataManager.DesignData>
+    </dx:IEnumerableDataSource>
+  </UserControl.Resources>
   <Grid>
     <dxlc:LayoutControl>
       <dxlc:LayoutGroup Orientation="Vertical">
-        <Button Content="Something" Name="Something" />
-        <dxlc:LayoutItem Label="Text" Name="layoutItem1">
+        <Button Content="Something" x:Name="Something" />
+        <dxlc:LayoutItem Label="Text" x:Name="layoutItem1">
           <!--<TextBox Name="Text" />-->
         </dxlc:LayoutItem>
         <dxlc:GroupBox Header="header">
-          <TextBox Name="Text" />
+          <TextBox x:Name="Text" />
         </dxlc:GroupBox>
+        <dxc:ChartControl Name="Products">
+          <dxc:ChartControl.Legend>
+            <dxc:Legend/>
+          </dxc:ChartControl.Legend>
+          <dxc:XYDiagram2D>
+            <dxc:BarSideBySideSeries2D DisplayName="Products" ArgumentDataMember="Name" ValueDataMember="Value"/>
+          </dxc:XYDiagram2D>
+        </dxc:ChartControl>
       </dxlc:LayoutGroup>
     </dxlc:LayoutControl>
   </Grid>

@@ -12,6 +12,7 @@ using DevExpress.Xpf.LayoutControl;
 using DevExpress.Xpf.PivotGrid;
 using DXGroupBox = DevExpress.Xpf.LayoutControl.GroupBox;
 using LayoutGroup = DevExpress.Xpf.Docking.LayoutGroup;
+using DevExpress.Xpf.Charts;
 
 namespace Caliburn.Micro.DevExpress
 {
@@ -50,6 +51,9 @@ namespace Caliburn.Micro.DevExpress
 
       //LayoutControl
       ConventionManager.AddElementConvention<DataLayoutControl>(DataLayoutControl.CurrentItemProperty, "DataContext", "Loaded");
+
+      //ChartControl
+      ConventionManager.AddElementConvention<ChartControl>(ChartControl.DataSourceProperty, "DataContext", "Loaded");
 
       //Editors
       ConventionManager.AddElementConvention<LookUpEditBase>(LookUpEditBase.ItemsSourceProperty, "SelectedItem", "SelectedIndexChanged")

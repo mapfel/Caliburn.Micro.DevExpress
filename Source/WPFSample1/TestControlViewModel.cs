@@ -8,6 +8,13 @@ namespace WPFSample1
 {
   public class TestControlViewModel : PropertyChangedBase
   {
+    public TestControlViewModel()
+    {
+      Products = Model.Product.GetProductList();
+    }
+
+    public BindableCollection<Model.Product> Products { get; set; }
+
     private string text;
 
     public string Text
