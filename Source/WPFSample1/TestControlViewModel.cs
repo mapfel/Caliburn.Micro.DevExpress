@@ -34,5 +34,36 @@ namespace WPFSample1
     {
       Text = "Something";
     }
+
+    private double progress;
+
+    public double Progress
+    {
+      get { return progress; }
+      set
+      {
+        if (value != progress)
+        {
+          progress = value;
+          NotifyOfPropertyChange(() => Progress);
+        }
+      }
+    }
+
+    private decimal spin;
+
+    public decimal Spin
+    {
+      get { return spin; }
+      set
+      {
+        if (value != spin)
+        {
+          spin = value;
+          NotifyOfPropertyChange(() => Spin);
+        }
+      }
+    }
+
   }
 }

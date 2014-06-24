@@ -13,6 +13,8 @@ namespace WPFSample1
     {
       Products = Model.Product.GetProductList();
       TestControl = new TestControlViewModel();
+      TestControl.Progress = 20;
+      TestControl.Spin = 4.5M;
     }
 
     public BindableCollection<Model.Product> Products { get; set; }

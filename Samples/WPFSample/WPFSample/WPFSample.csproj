@@ -40,9 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.Core.2.0.0\lib\net40\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Micro.DevExpress, Version=0.6.0.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Caliburn.Micro.DevExpress, Version=0.6.0.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Caliburn.Micro.DevExpress.0.6.0.4\lib\net40-Client\Caliburn.Micro.DevExpress.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.DevExpress.0.6.0.5\lib\net40-Client\Caliburn.Micro.DevExpress.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Platform">
       <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net40\Caliburn.Micro.Platform.dll</HintPath>

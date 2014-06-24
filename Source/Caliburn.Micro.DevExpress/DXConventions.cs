@@ -65,6 +65,9 @@ namespace Caliburn.Micro.DevExpress
           ConventionManager.ConfigureSelectedItem(element, LookUpEditBase.SelectedItemProperty, viewModelType, path);
           return true;
         };
+      ConventionManager.AddElementConvention<RangeBaseEdit>(RangeBaseEdit.ValueProperty, "Value", "EditValueChanged");
+      ConventionManager.AddElementConvention<SpinEdit>(SpinEdit.ValueProperty, "Value", "EditValueChanged");
+      ConventionManager.AddElementConvention<BaseEdit>(BaseEdit.EditValueProperty, "EditValue", "EditValueChanged");
 
       //Docking
       ConventionManager.AddElementConvention<DocumentGroup>(DocumentGroup.ItemsSourceProperty, "ItemsSource", "SelectedItemChanged")

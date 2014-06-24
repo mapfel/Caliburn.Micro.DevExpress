@@ -25,7 +25,7 @@
           <!--<TextBox Name="Text" />-->
         </dxlc:LayoutItem>
         <dxlc:GroupBox Header="header">
-          <TextBox x:Name="Text" />
+          <dxe:TextEdit Name="Text" />
         </dxlc:GroupBox>
         <dxc:ChartControl Name="Products">
           <dxc:ChartControl.Legend>
@@ -35,6 +35,12 @@
             <dxc:BarSideBySideSeries2D DisplayName="Products" ArgumentDataMember="Name" ValueDataMember="Value"/>
           </dxc:XYDiagram2D>
         </dxc:ChartControl>
+        <dxlc:LayoutItem Label="Spin">
+          <dxe:SpinEdit Name="Spin" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Progress">
+          <dxe:ProgressBarEdit Name="Progress" />
+        </dxlc:LayoutItem>
       </dxlc:LayoutGroup>
     </dxlc:LayoutControl>
   </Grid>
