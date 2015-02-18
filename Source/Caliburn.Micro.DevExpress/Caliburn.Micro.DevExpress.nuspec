@@ -10,11 +10,11 @@
     <projectUrl>http://calmicrodevexpress.codeplex.com/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Conventions added to support BaseEdit (most editors), SpinEdit and RangeBaseEdit (ProgressBarEdit and TrackBarEdit)</releaseNotes>
-    <copyright>Copyright 2012-2014 by $author$</copyright>
+    <releaseNotes>Support for Devexpress v14.2 and Caliburn.Micro v2.0.1</releaseNotes>
+    <copyright>Copyright 2012-2015 by $author$</copyright>
     <tags>Caliburn.Micro DevExpress WPF</tags>
     <dependencies>
-      <dependency id="Caliburn.Micro" version="2.0.0" />
+      <dependency id="Caliburn.Micro" version="2.0.1" />
     </dependencies>
   </metadata>
 </package>

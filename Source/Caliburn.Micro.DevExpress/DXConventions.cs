@@ -208,7 +208,7 @@ namespace Caliburn.Micro.DevExpress
           }
 
 #if NET
-                var childCount = (current is UIElement || current is UIElement3D || current is ContainerVisual ? VisualTreeHelper.GetChildrenCount(current) : 0);
+          var childCount = ((current is UIElement || current is UIElement3D || current is ContainerVisual) && !(current is DockLayoutManager) ? VisualTreeHelper.GetChildrenCount(current) : 0);
 #else
           var childCount = VisualTreeHelper.GetChildrenCount(current);
 #endif
